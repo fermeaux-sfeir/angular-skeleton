@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+@import 'palette';
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$color-primary: mat-palette($sfeir-blue);
+$color-secondary: mat-palette($sfeir-orange);
+$color-warn: mat-palette($mat-red);
+
+$cockpit-app-theme: mat-light-theme($color-primary, $color-secondary, $color-warn);
+
+$accent: map-get($cockpit-app-theme, accent);
+$primary: map-get($cockpit-app-theme, primary);
+$primary-contrast: mat-contrast($primary, 500);
+
+@include angular-material-theme($cockpit-app-theme);
+
+.body-wrapper {
+  background-image: url('/assets/SFEIR_Commercial_fonds_16-9_B_02.png');
+  background-position: center;
+  background-size: cover;
+}
+
+.left-border-orange {
+  border-left: 0.4em solid;
+  border-color: mat-color($accent, 500);
+}
+
+.left-border-blue {
+  border-left: 0.4em solid;
+  border-color: mat-color($primary, 500);
+}

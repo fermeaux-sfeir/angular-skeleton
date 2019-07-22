@@ -1,0 +1,56 @@
+<header>
+  <mat-toolbar class="mat-primary">
+    <a [routerLink]="['/home']" fxLayoutAlign="center center">
+      <img class="logo" src="/assets/logo-SFEIR-blanc-orange.svg" />
+    </a>
+    <a
+      *ngFor="let item of navItems"
+      class="navbar-action"
+      [routerLink]="[item.path]"
+      [routerLinkActive]="'is-active'"
+      fxLayoutAlign="center center"
+      fxHide.lt-lg
+    >
+      <mat-icon>{{ item.icon }}</mat-icon>
+      &nbsp;{{ item.label }}
+    </a>
+    <span fxFlex="1 1 auto"></span>
+    <a (click)="logOut()" class="navbar-action" style="cursor: pointer" fxHide.lt-lg>Se déconnecter</a>
+    <button mat-icon-button fxHide.lg (click)="appDrawer.open()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>
+<main style="height: 100vh">
+  <mat-sidenav-container style="height: 100%">
+    <mat-sidenav
+      #appDrawer
+      [mode]="'over'"
+      [fixedInViewport]="false"
+      [fixedTopGap]="64"
+      [autoFocus]="false"
+      position="end"
+      class="sidenav"
+    >
+      <a
+        *ngFor="let item of navItems"
+        class="navbar-action"
+        [routerLink]="[item.path]"
+        [routerLinkActive]="'is-active'"
+        fxLayoutAlign="start center"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        &nbsp;{{ item.label }}
+      </a>
+      <a (click)="logOut()" class="navbar-action" style="cursor: pointer" fxLayoutAlign="start center"
+        ><mat-icon>exit_to_app</mat-icon> &nbsp;Se déconnecter</a
+      >
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="main-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</main>
